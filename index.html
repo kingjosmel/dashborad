@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="src/output.css">
+    <script src="quiz.js" defer></script>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 bg-blue-200">
+    <div class="w-full max-w-lg p-6 bg-white rounded shadow-md">
+        <h1 class="mb-4 text-2xl font-bold text-center">HTML Quiz</h1>
+        <div id="start-screen" class="text-center">
+            <button id="start-btn" class="w-full px-4 py-2 text-white bg-blue-500 rounded md:w-auto">Start Quiz</button>
+        </div>
+        <div id="quiz-container" class="hidden">
+            <p id="question" class="mb-4 font-bold text-center">Question goes here</p>
+            <div id="answer-buttons" class="flex flex-col gap-2 mb-4">
+                <button class="w-full p-2 bg-gray-200 rounded">Answer 1</button>
+                <button class="w-full p-2 bg-gray-200 rounded">Answer 2</button>
+                <button class="w-full p-2 bg-gray-200 rounded">Answer 3</button>
+                <button class="w-full p-2 bg-gray-200 rounded">Answer 4</button>
+            </div>
+            <button id="next-btn" class="hidden w-full px-4 py-2 text-white bg-black rounded md:w-auto">Next</button>
+        </div>
+        <div id="result-screen" class="hidden text-center">
+            <p id="result-message" class="mb-4 text-xl font-bold">Your result</p>
+            <button id="restart-btn" class="w-full px-4 py-2 text-white bg-blue-500 rounded md:w-auto">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
