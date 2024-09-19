@@ -10,7 +10,7 @@ const resultMessage = document.getElementById('result-message');
 let shuffledQuestions, currentQuestionIndex;
 let correctAnswers = 0;
 
-const questions = [
+const questions = [ // QUESTIONS 
     { 
         question: 'What does HTML stand for?', 
         answers: [
