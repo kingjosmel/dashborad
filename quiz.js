@@ -226,7 +226,7 @@ function showQuestion(question) {
     question.answers.forEach(answer => {
         const button = document.createElement('button'); // Create a button for each answer
         button.innerText = answer.text; // Set the button text to the answer text
-        button.classList.add('bg-gray-200', 'p-2', 'rounded', 'hover:bg-gray-300');  // Style the button
+        button.classList.add('bg-gray-200', 'p-2', 'rounded'); //'hover:bg-gray-300');  // Style the button
         if (answer.correct) {
             button.dataset.correct = answer.correct;  // Set a data attribute if the answer is correct
         }
