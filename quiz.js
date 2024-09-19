@@ -193,82 +193,92 @@ const questions = [
     }
 ];
 
-
+// Add an event listener to the start button to call startQuiz when clicked
 startButton.addEventListener('click', startQuiz);
+// Add an event listener to the next button to set the next question when clicked
 nextButton.addEventListener('click', () => {
-    currentQuestionIndex++;
-    setNextQuestion();
+    currentQuestionIndex++; // Move to the next question
+    setNextQuestion();// Set up the next question
 });
+// Add an event listener to the restart button to restart the quiz when clicked
 restartButton.addEventListener('click', startQuiz);
 
+// Function to start the quiz
 function startQuiz() {
-    startButton.classList.add('hidden');
-    resultScreen.classList.add('hidden');
-    quizContainer.classList.remove('hidden');
-    shuffledQuestions = questions.sort(() => Math.random() - 0.5);
-    currentQuestionIndex = 0;
-    correctAnswers = 0;
-    setNextQuestion();
+    startButton.classList.add('hidden'); // Hide the start button
+    resultScreen.classList.add('hidden'); // Hide the result screen
+    quizContainer.classList.remove('hidden'); // Show the quiz container
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5); // Shuffle the questions
+    currentQuestionIndex = 0; // Reset question index
+    correctAnswers = 0; // Reset the correct answers counter
+    setNextQuestion(); // Set the first question
 }
 
+// Function to set up the next question
 function setNextQuestion() {
-    resetState();
-    showQuestion(shuffledQuestions[currentQuestionIndex]);
+    resetState(); // Reset the state for the next question
+    showQuestion(shuffledQuestions[currentQuestionIndex]); // Show the current question
 }
 
+// Function to display the current question and its answers
 function showQuestion(question) {
-    questionElement.innerText = question.question;
+    questionElement.innerText = question.question; // Display the question text
     question.answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.classList.add('bg-gray-200', 'p-2', 'rounded', 'hover:bg-gray-300');
+        const button = document.createElement('button'); // Create a button for each answer
+        button.innerText = answer.text; // Set the button text to the answer text
+        button.classList.add('bg-gray-200', 'p-2', 'rounded', 'hover:bg-gray-300');  // Style the button
         if (answer.correct) {
-            button.dataset.correct = answer.correct;
+            button.dataset.correct = answer.correct;  // Set a data attribute if the answer is correct
         }
-        button.addEventListener('click', selectAnswer);
-        answerButtonsElement.appendChild(button);
+        button.addEventListener('click', selectAnswer);   // Add event listener for answer selection
+        answerButtonsElement.appendChild(button); // Add the button to the answer buttons element
     });
 }
 
+// Function to reset the state before showing the next question
 function resetState() {
-    nextButton.classList.add('hidden');
+    nextButton.classList.add('hidden'); // Hide the next button
     while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild);  // Remove all previous answer buttons
     }
 }
 
+// Function to handle the answer selection
 function selectAnswer(e) {
-    const selectedButton = e.target;
-    const correct = selectedButton.dataset.correct;
+    const selectedButton = e.target; // Get the button that was clicked
+    const correct = selectedButton.dataset.correct; // Check if the answer is correct
     if (correct) {
-        correctAnswers++;
+        correctAnswers++; // Increment the correct answers counter
     }
     Array.from(answerButtonsElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct);
+        setStatusClass(button, button.dataset.correct); // Set the status class for each button
     });
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove('hidden');
+        nextButton.classList.remove('hidden'); // Show the next button if there are more questions
     } else {
-        showResult();
+        showResult(); // Show the result if it was the last question
     }
 }
 
+// Function to set the status class for an answer button
 function setStatusClass(element, correct) {
     clearStatusClass(element);
     if (correct) {
-        element.classList.add('bg-green-500');
+        element.classList.add('bg-green-500'); // Add green background if the answer is correct
     } else {
-        element.classList.add('bg-red-500');
+        element.classList.add('bg-red-500');   // Add red background if the answer is incorrect
     }
 }
 
+// Function to clear the status classes from an element
 function clearStatusClass(element) {
-    element.classList.remove('bg-green-500');
-    element.classList.remove('bg-red-500');
-}
+    element.classList.remove('bg-green-500'); // Remove green background class
+    element.classList.remove('bg-red-500');  // Remove red background class
+} 
 
+// Function to show the result after the quiz is complete
 function showResult() {
-    quizContainer.classList.add('hidden');
-    resultScreen.classList.remove('hidden');
+    quizContainer.classList.add('hidden');  // Hide the quiz container
+    resultScreen.classList.remove('hidden'); // Show the result screen
     resultMessage.innerText = `You got ${correctAnswers} out of ${questions.length} correct!`;
 }
